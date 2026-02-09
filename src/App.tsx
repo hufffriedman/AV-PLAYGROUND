@@ -1,4 +1,4 @@
-import * as Tone from "tone";
+import * as Tone from "tone" ;
 
 export default function App() {
   const start = async () => {
