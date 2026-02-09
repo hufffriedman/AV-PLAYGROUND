@@ -1,42 +1,18 @@
-import * as Tone from "tone" ;
+import { useState } from "react";
+import HandCam, { HandControls } from "./components/HandCam";
 
 export default function App() {
-  const start = async () => {
-    await Tone.start();
-
-    const synth = new Tone.Synth().toDestination();
-
-    new Tone.Loop((time) => {
-      synth.triggerAttackRelease("C2", "8n", time);
-    }, "4n").start(0);
-
-    Tone.Transport.start();
-  };
+  const [enabled, setEnabled] = useState(true);
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        background: "#0b0d10",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <button
-        onClick={start}
-        style={{
-          padding: 20,
-          fontSize: 18,
-          background: "#1a1f27",
-          color: "white",
-          border: "1px solid #333",
-          borderRadius: 10,
-        }}
-      >
-        ▶ Start Instrument
-      </button>
+    <div style={{ padding: 24, maxWidth: 900, margin: "0 auto" }}>
+      <h1 style={{ marginBottom: 12 }}>AV Playground</h1>
+
+      <div style={{ marginBottom: 16 }}>
+        <HandControls enabled={enabled} onToggle={setEnabled} />
+      </div>
+
+      <HandCam enabled={enabled} />
     </div>
   );
 }
-
